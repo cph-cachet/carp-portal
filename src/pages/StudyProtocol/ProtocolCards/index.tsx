@@ -15,6 +15,7 @@ import {
   StyledNameCard,
 } from "./styles";
 import DeviceConnection = carpProtocols.dk.cachet.carp.protocols.application.StudyProtocolSnapshot.DeviceConnection;
+import { getInputDataName } from "@Assets/inputTypeNames";
 
 type ParticipantRole =
   carpCommon.dk.cachet.carp.common.application.users.ParticipantRole;
@@ -120,7 +121,7 @@ const ProtocolCards = ({ protocolId }: Props) => {
               return (
                 <li key={uuidv4()}>
                   <Typography variant="h4">
-                    {data.attribute.inputDataType.name}
+                    {getInputDataName(data.attribute.inputDataType.name)}
                   </Typography>
                 </li>
               );

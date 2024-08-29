@@ -7,6 +7,7 @@ import { Skeleton, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import DeviceDropdown from "../DeviceDropdown";
+import { getInputDataName } from "@Assets/inputTypeNames";
 import {
   CardTitle,
   ProtocolDescription,
@@ -116,7 +117,7 @@ const ProtocolCards = () => {
               return (
                 <li key={uuidv4()}>
                   <Typography variant="h4">
-                    {data.attribute.inputDataType.name}
+                    {getInputDataName(data.attribute.inputDataType.name)}
                   </Typography>
                 </li>
               );

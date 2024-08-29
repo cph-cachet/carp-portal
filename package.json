@@ -2,6 +2,7 @@
   "name": "@carp-dk/portal",
   "version": "1.0.0",
   "homepage": "/",
+  "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development vite serve src --config vite.config.ts",
     "build": "cross-env NODE_ENV=production vite build src --config vite.config.ts",
