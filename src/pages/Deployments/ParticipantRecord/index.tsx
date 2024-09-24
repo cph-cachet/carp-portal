@@ -61,9 +61,7 @@ const ParticipantRecord = ({
     if (!lastData) {
       return "";
     }
-    const elapsedDays = calculateDaysPassedFromDate(
-      lastData.toString(),
-    );
+    const elapsedDays = calculateDaysPassedFromDate(lastData.toString());
     if (elapsedDays === 0) {
       return "Last data: Today";
     }

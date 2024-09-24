@@ -39,6 +39,7 @@ export const StyledTableRow = styled(TableRow)({
   paddingLeft: 0,
   "&:hover": {
     backgroundColor: "#F5F5F5",
+    borderRadius: "16px",
     transition: "background-color 0.2s ease-in-out",
     cursor: "pointer",
   },

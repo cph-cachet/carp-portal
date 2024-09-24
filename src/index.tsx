@@ -8,9 +8,11 @@ import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
 import validateEnv from "./envValidator";
 import App from "./pages/App";
 import QueryClientComponent from "./queryClientComponent";
+import i18n from "./i18n";
 
 if (process.env.NODE_ENV === "development") {
   setupLocatorUI();
@@ -33,9 +35,11 @@ root.render(
         >
           <BrowserRouter basename={`${import.meta.env.VITE_BASE_NAME}`}>
             <QueryClientComponent>
-              <ReactQueryDevtools initialIsOpen={false} position="right" />
-              <App />
-              <Snackbar />
+              <I18nextProvider i18n={i18n}>
+                <ReactQueryDevtools initialIsOpen={false} position="right" />
+                <App />
+                <Snackbar />
+              </I18nextProvider>
             </QueryClientComponent>
           </BrowserRouter>
         </AuthenticationProvider>

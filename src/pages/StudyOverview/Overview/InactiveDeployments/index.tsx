@@ -115,11 +115,11 @@ const InactiveDeployments = () => {
           <TableBody>
             {inactiveDeployments.map((participant) => (
               <StyledTableRow
-                onClick={() =>
+                onClick={() => {
                   navigate(
-                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}/participants/${participant.participantId}`,
-                  )
-                }
+                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}`,
+                  );
+                }}
                 key={participant.deploymentId as unknown as string}
               >
                 <StyledTableCell>
