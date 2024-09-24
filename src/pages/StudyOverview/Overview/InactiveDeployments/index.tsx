@@ -107,7 +107,7 @@ const InactiveDeployments = () => {
               <HeaderTableCell>
                 <HeaderText variant="h5">Deployment ID</HeaderText>
               </HeaderTableCell>
-              <HeaderTableCell width="25%" align="center">
+              <HeaderTableCell>
                 <HeaderText variant="h5">Last Data</HeaderText>
               </HeaderTableCell>
             </StyledTableRow>
@@ -115,19 +115,19 @@ const InactiveDeployments = () => {
           <TableBody>
             {inactiveDeployments.map((participant) => (
               <StyledTableRow
-                onClick={() => {
+                onClick={() =>
                   navigate(
-                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}`,
-                  );
-                }}
-                key={participant.deploymentId as unknown as string}
+                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}/participants/${participant.participantId}`,
+                  )
+                }
+                key={participant.deploymentId}
               >
                 <StyledTableCell>
                   <SecondaryCellText variant="h5">
-                    {participant.deploymentId as unknown as string}
+                    {participant.deploymentId}
                   </SecondaryCellText>
                 </StyledTableCell>
-                <StyledTableCell align="center">
+                <StyledTableCell>
                   <SecondaryCellText variant="h5">
                     {formatDateTime(
                       participant.dateOfLastDataUpload.toString(),

@@ -1,5 +1,5 @@
-import DeploymentsInProgress from "./DeploymentsInProgress";
 import DeploymentStatus from "./DeploymentStatus";
+import DeviceDeploymentStatus from "./DeviceDeploymentStatus";
 import InactiveDeployments from "./InactiveDeployments";
 import Status from "./Status";
 import StyledContainer from "./styles";
@@ -9,8 +9,10 @@ const Overview = () => {
     <StyledContainer>
       <Status />
       <DeploymentStatus />
-      <DeploymentsInProgress />
+      {/* <StudyDataTypes /> */}
       <InactiveDeployments />
+      <DeviceDeploymentStatus />
+      {/* <StudyData /> */}
     </StyledContainer>
   );
 };
