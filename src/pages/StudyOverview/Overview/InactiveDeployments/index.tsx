@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Stack } from "@mui/system";
 import { formatDateTime } from "@Utils/utility";
 import LoadingSkeleton from "../LoadingSkeleton";
@@ -27,7 +27,6 @@ import {
 
 const InactiveDeployments = () => {
   const { id: studyId } = useParams();
-  const navigate = useNavigate();
   const menuItems = [
     { value: 24, label: "24 h" },
     { value: 48, label: "48 h" },
@@ -115,11 +114,6 @@ const InactiveDeployments = () => {
           <TableBody>
             {inactiveDeployments.map((participant) => (
               <StyledTableRow
-                onClick={() =>
-                  navigate(
-                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}`,
-                  )
-                }
                 key={participant.deploymentId as unknown as string}
               >
                 <StyledTableCell>
