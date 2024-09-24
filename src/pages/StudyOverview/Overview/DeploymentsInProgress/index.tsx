@@ -105,7 +105,7 @@ const DeploymentsInProgress = () => {
         >
           <TableHead>
             <StyledTableRow>
-              <HeaderTableCell width="150px">
+              <HeaderTableCell width="25%">
                 <HeaderText variant="h5">Deployment ID</HeaderText>
               </HeaderTableCell>
               <HeaderTableCell>
@@ -115,45 +115,34 @@ const DeploymentsInProgress = () => {
           </TableHead>
           <TableBody>
             {deploymentProgress.map((g) => (
-              <StyledTableRow key={g.deploymentId}>
+              <StyledTableRow
+                onClick={() =>
+                  navigate(
+                    `/studies/${studyId}/participants/deployments/${g.deploymentId}/participants/`,
+                  )
+                }
+                key={g.deploymentId}
+              >
                 <StyledTableCell align="center">
-                  <SecondaryCellText
-                    variant="h5"
-                    marginRight="15px"
-                    sx={{
-                      "&:hover": {
-                        backgroundColor: "#F5F5F5",
-                        borderRadius: "16px",
-                        transition: "background-color 0.2s ease-in-out",
-                        cursor: "pointer",
-                      },
-                    }}
-                    onClick={() => {
-                      navigate(
-                        `/studies/${studyId}/participants/deployments/${g.deploymentId}`,
-                      );
-                    }}
-                  >
+                  <SecondaryCellText variant="h5">
                     {`... ${g.deploymentId.slice(-4)}`}
                   </SecondaryCellText>
                 </StyledTableCell>
                 <StyledTableCell>
-                  <SecondaryCellText variant="h5" noWrap paddingLeft="4px">
-                    <Stack direction="row" gap="16px">
-                      {g.devices.map((d) => (
-                        <Stack
-                          direction="row"
-                          spacing={0.5}
-                          alignItems="center"
-                          key={d.device}
-                        >
-                          <StyledStatusDot status={d.__type.split(".").pop()} />
-                          <Typography variant="h6">
-                            {d.device.roleName}
-                          </Typography>
-                        </Stack>
-                      ))}
-                    </Stack>
+                  <SecondaryCellText variant="h5" noWrap>
+                    {g.devices.map((d) => (
+                      <Stack
+                        direction="row"
+                        spacing={0.5}
+                        alignItems="center"
+                        key={d.device}
+                      >
+                        <StyledStatusDot status={d.__type.split(".").pop()} />
+                        <Typography variant="h6">
+                          {d.device.roleName}
+                        </Typography>
+                      </Stack>
+                    ))}
                   </SecondaryCellText>
                 </StyledTableCell>
               </StyledTableRow>
