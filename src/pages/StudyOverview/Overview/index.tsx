@@ -9,10 +9,8 @@ const Overview = () => {
     <StyledContainer>
       <Status />
       <DeploymentStatus />
-      {/* <StudyDataTypes /> */}
-      <InactiveDeployments />
       <DeploymentsInProgress />
-      {/* <StudyData /> */}
+      <InactiveDeployments />
     </StyledContainer>
   );
 };
