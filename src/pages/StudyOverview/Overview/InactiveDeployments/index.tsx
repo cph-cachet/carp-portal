@@ -117,14 +117,14 @@ const InactiveDeployments = () => {
               <StyledTableRow
                 onClick={() =>
                   navigate(
-                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}/participants/${participant.participantId}`,
+                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}`,
                   )
                 }
-                key={participant.deploymentId}
+                key={participant.deploymentId as unknown as string}
               >
                 <StyledTableCell>
                   <SecondaryCellText variant="h5">
-                    {participant.deploymentId}
+                    {participant.deploymentId as unknown as string}
                   </SecondaryCellText>
                 </StyledTableCell>
                 <StyledTableCell align="center">
