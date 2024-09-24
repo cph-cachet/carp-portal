@@ -48,7 +48,7 @@ const Participants = () => {
             gap={16}
             key={p.participantId}
             sx={{
-              paddingBottom: "8px",
+              paddingBottom: "8 px",
             }}
           >
             <Stack gap="15px" direction="row" width="200px">
