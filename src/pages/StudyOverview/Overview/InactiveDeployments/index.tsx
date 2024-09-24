@@ -107,7 +107,7 @@ const InactiveDeployments = () => {
               <HeaderTableCell>
                 <HeaderText variant="h5">Deployment ID</HeaderText>
               </HeaderTableCell>
-              <HeaderTableCell>
+              <HeaderTableCell width="25%" align="center">
                 <HeaderText variant="h5">Last Data</HeaderText>
               </HeaderTableCell>
             </StyledTableRow>
@@ -127,7 +127,7 @@ const InactiveDeployments = () => {
                     {participant.deploymentId}
                   </SecondaryCellText>
                 </StyledTableCell>
-                <StyledTableCell>
+                <StyledTableCell align="center">
                   <SecondaryCellText variant="h5">
                     {formatDateTime(
                       participant.dateOfLastDataUpload.toString(),
