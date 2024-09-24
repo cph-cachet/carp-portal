@@ -10,6 +10,8 @@ import { PieValueType } from "@mui/x-charts";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import carpStudies from "@cachet/carp-studies-core";
+import carpDeployments from "@cachet/carp-deployments-core";
 import LoadingSkeleton from "../LoadingSkeleton";
 import DeploymentStatusLegend from "./DeploymentStatusLegend";
 import TooltipContent from "./TooltipContent";
@@ -20,6 +22,8 @@ import {
   StyledTooltip,
   Top,
 } from "./styles";
+import ParticipantGroupStatus = carpStudies.dk.cachet.carp.studies.application.users.ParticipantGroupStatus;
+import StudyDeploymentStatus = carpDeployments.dk.cachet.carp.deployments.application.StudyDeploymentStatus;
 
 const DeploymentStatus = () => {
   const navigate = useNavigate();
@@ -36,9 +40,20 @@ const DeploymentStatus = () => {
     if (!participantStatus) return;
     const data = participantStatus.reduce(
       (acc, curr) => {
-        acc[
-          curr.constructor.name.toLocaleLowerCase().replace("_0", "")
-        ].value += 1;
+        if (curr instanceof ParticipantGroupStatus.InDeployment) {
+          const depStatus = curr.studyDeploymentStatus;
+          if (depStatus instanceof StudyDeploymentStatus.Invited) {
+            acc.invited.value += 1;
+          } else if (depStatus instanceof StudyDeploymentStatus.Running) {
+            acc.running.value += 1;
+          } else if (depStatus instanceof StudyDeploymentStatus.Stopped) {
+            acc.stopped.value += 1;
+          } else if (
+            depStatus instanceof StudyDeploymentStatus.DeployingDevices
+          ) {
+            acc.deploying.value += 1;
+          }
+        }
         return acc;
       },
       {
@@ -48,7 +63,7 @@ const DeploymentStatus = () => {
           label: "Invited",
           color: getDeploymentStatusColor("Invited"),
         },
-        inDeployment: {
+        deploying: {
           id: 1,
           value: 0,
           label: "Deploying",
