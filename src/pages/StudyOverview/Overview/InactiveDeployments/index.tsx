@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Stack } from "@mui/system";
 import { formatDateTime } from "@Utils/utility";
 import LoadingSkeleton from "../LoadingSkeleton";
@@ -116,11 +116,6 @@ const InactiveDeployments = () => {
           <TableBody>
             {inactiveDeployments.map((participant) => (
               <StyledTableRow
-                onClick={() =>
-                  navigate(
-                    `/studies/${studyId}/participants/deployments/${participant.deploymentId}`,
-                  )
-                }
                 key={participant.deploymentId as unknown as string}
               >
                 <StyledTableCell>
