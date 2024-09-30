@@ -277,6 +277,14 @@ export const useStatistics = (studyId: string) => {
   });
 };
 
+export const useGetParticipantData = (deploymentId: string) => {
+  return useQuery<HashMap<NamespacedId, any | null>, CarpServiceError>({
+    queryFn: async () =>
+      carpApi.getParticipantData_CORE(deploymentId, getConfig()),
+    queryKey: ["participantData", deploymentId],
+  });
+};
+
 export const useSetParticipantData = (deploymentId: string) => {
   const { setSnackbarSuccess, setSnackbarError } = useSnackbar();
   const queryClient = useQueryClient();

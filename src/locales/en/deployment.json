@@ -1,0 +1,18 @@
+{
+  "title": "Deployment",
+  "description": "See the detailed data of the Deployment. Select the participant for further individual data.",
+  "participants_card": {
+    "title": "Participants"
+  },
+  "devices_card": {
+    "title": "Devices",
+    "description": "Select the master device in order to deploy."
+  },
+  "informed_consents_card": {
+    "title": "Informed Consents"
+  },
+  "data_card": {
+    "title": "Data",
+    "description": "See an overview of the collected data for each participant master device."
+  }
+}

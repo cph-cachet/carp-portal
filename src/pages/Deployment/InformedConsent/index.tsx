@@ -1,19 +1,13 @@
 import CarpErrorCardComponent from "@Components/CarpErrorCardComponent";
-import { useParticipantConsent } from "@Utils/queries/participants";
-import { formatDateTime } from "@Utils/utility";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import { Typography } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import CarpAccordion from "@Components/CarpAccordion";
+import { Typography } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import { useTranslation } from "react-i18next";
+import { ConsentResponse } from "@carp-dk/client";
+import { useGetParticipantData } from "@Utils/queries/participants";
 import LoadingSkeleton from "../LoadingSkeleton";
-import {
-  DownloadButton,
-  LastUploadText,
-  Right,
-  StyledCard,
-  StyledDivider,
-  Title,
-} from "./styles";
+import { DownloadButton, NameContainer } from "./styles";
 
 interface FileInfo {
   data: string;
@@ -23,13 +17,13 @@ interface FileInfo {
 
 const InformedConsent = () => {
   const { deploymentId } = useParams(); // need to somehow get the role
+  const { t } = useTranslation();
 
   const {
     data: consents,
     isLoading,
     error,
-  } = useParticipantConsent(deploymentId);
-  const [consent, setConsent] = useState(null);
+  } = useGetParticipantData(deploymentId);
 
   const downloadFile = ({ data, fileName, fileType }: FileInfo) => {
     const blob = new Blob([data], { type: fileType });
@@ -45,7 +39,10 @@ const InformedConsent = () => {
     a.remove();
   };
 
-  const exportToJson = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const exportToJson = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    consent: ConsentResponse,
+  ) => {
     e.preventDefault();
     downloadFile({
       data: JSON.stringify(consent),
@@ -54,51 +51,58 @@ const InformedConsent = () => {
     });
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      // TODO: Get the consent for the current user
-      setConsent(consents[consents.length - 1]);
-    }
-  }, [consents]);
-
-  const dateOfLastUpdate = useMemo(() => {
-    if (consent) {
-      return `Last Updated: ${formatDateTime(consent.updated_at, {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      })}`;
-    }
-    return "Informed consent not found";
-  }, [consent]);
+  // const dateOfLastUpdate = useMemo(() => {
+  //   if (consent) {
+  //     return `Last Updated: ${formatDateTime(consent.updated_at, {
+  //       year: "numeric",
+  //       month: "numeric",
+  //       day: "numeric",
+  //     })}`;
+  //   }
+  //   return "Informed consent not found";
+  // }, [consent]);
 
   if (isLoading) return <LoadingSkeleton />;
 
   if (error) {
     return (
       <CarpErrorCardComponent
-        message="An error occurred while loading informed consent"
+        message={t("error.informed_consents")}
         error={error}
       />
     );
   }
-
+  console.log(consents);
   return (
-    <StyledCard elevation={2}>
-      <Title variant="h3">Informed Consent</Title>
-      <Right>
-        <LastUploadText variant="h6">{dateOfLastUpdate}</LastUploadText>
-        {consent && (
-          <>
-            <StyledDivider />
-            <DownloadButton onClick={(e) => exportToJson(e)}>
-              <Typography variant="h6">Export</Typography>
-              <FileDownloadOutlinedIcon fontSize="small" />
-            </DownloadButton>
-          </>
-        )}
-      </Right>
-    </StyledCard>
+    <CarpAccordion title={t("deployment:informed_consents_card.title")}>
+      {consents &&
+        consents.map((c) => {
+          return (
+            <>
+              <NameContainer>
+                {c.created_by && (
+                  <>
+                    <PersonIcon fontSize="small" />
+                    <Typography variant="h6">{c.created_by}</Typography>
+                  </>
+                )}
+              </NameContainer>
+              <>
+                <i>
+                  <Typography variant="h6">
+                    {t("common:last_uploaded", { date: c.updated_at })}
+                  </Typography>
+                </i>
+                <DownloadButton onClick={(e) => exportToJson(e, c)}>
+                  <Typography variant="h6">
+                    {t("common:export_data")}
+                  </Typography>
+                </DownloadButton>
+              </>
+            </>
+          );
+        })}
+    </CarpAccordion>
   );
 };
 
