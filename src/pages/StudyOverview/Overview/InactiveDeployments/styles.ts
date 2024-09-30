@@ -38,9 +38,10 @@ export const HeaderText = styled(Typography)(({ theme }) => ({
 export const StyledTableRow = styled(TableRow)({
   paddingLeft: 0,
   "&:hover": {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#EDEDED",
     transition: "background-color 0.2s ease-in-out",
     cursor: "pointer",
+    borderRadius: "16px",
   },
 });
 
