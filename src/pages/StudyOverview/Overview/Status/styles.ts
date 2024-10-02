@@ -31,10 +31,11 @@ export const Top = styled("div")(({ theme }) => ({
 
 export const ProtocolData = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
+  marginBottom: 8,
 }));
 
 export const StyledLink = styled(Typography)(({ theme }) => ({
-  marginTop: 16,
+  marginTop: 24,
   color: theme.palette.primary.main,
   cursor: "pointer",
   textDecoration: "underline",

@@ -141,7 +141,7 @@ const StudyData = () => {
         value={studyProtocolFormik.values.protocolId}
         onChange={handleProtocolChange}
       >
-        {protocols.map((protocol) => (
+        {protocols?.map((protocol) => (
           <MenuItem
             key={protocol.id.stringRepresentation}
             value={protocol.id.stringRepresentation}

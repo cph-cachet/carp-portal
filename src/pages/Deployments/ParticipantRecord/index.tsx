@@ -49,13 +49,20 @@ const ParticipantRecord = ({
   );
   const participantDeviceType = primaryDevice.device.__type;
   const deviceStatus = primaryDevice.__type.split(".").pop();
+  if (participantData.firstName === undefined) {
+    participantData.firstName = "";
+  }
+  if (participantData.lastName === undefined) {
+    participantData.lastName = "";
+  }
+
   const lastDataUpload = useMemo(() => {
     const lastData = participantData.dateOfLastDataUpload;
-    if (lastData === null) {
+    if (!lastData) {
       return "";
     }
     const elapsedDays = calculateDaysPassedFromDate(
-      lastData.value$kotlinx_datetime.toString(),
+      lastData.toString(),
     );
     if (elapsedDays === 0) {
       return "Last data: Today";

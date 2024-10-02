@@ -76,8 +76,8 @@ const StudiesSection = ({ isAdmin }: StudiesProps) => {
           studies &&
           studies
             .sort((a, b) =>
-              a.createdOn.value$kotlinx_datetime <
-              b.createdOn.value$kotlinx_datetime
+              a.createdOn <
+              b.createdOn
                 ? 1
                 : -1,
             )

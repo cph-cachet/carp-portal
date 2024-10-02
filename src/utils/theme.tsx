@@ -134,6 +134,7 @@ export const customPalette = {
     green: "#00A300",
     red: "#BA1A1A",
     grey: "#76777A",
+    blue: "#006398",
   },
   drawer: {
     active: "#E7F2FF",

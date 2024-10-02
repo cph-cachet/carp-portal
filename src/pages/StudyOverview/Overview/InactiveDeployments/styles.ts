@@ -1,13 +1,11 @@
-import { Card, TableCell, TableRow, Typography } from "@mui/material";
+import { Card, Select, TableCell, TableRow, Typography } from "@mui/material";
 import { styled } from "@Utils/theme";
-import { getDeviceStatusColor } from "@Utils/utility";
 
 export const StyledCard = styled(Card)({
   display: "flex",
   flexDirection: "column",
-  gridColumn: "span 2",
   padding: 24,
-  height: 288,
+  height: 580,
   borderRadius: 16,
 });
 
@@ -25,7 +23,6 @@ export const HeaderTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,
   borderBottomWidth: 1,
   zIndex: 0,
-  width: "30%",
   paddingLeft: 0,
   paddingBottom: 0,
 }));
@@ -54,17 +51,14 @@ export const StyledTableCell = styled(TableCell)({
   border: "none",
 });
 
-export const StatusContainer = styled("div")({
-  display: "flex",
-  alignItems: "center",
-  gap: 6,
+export const StyledSelect = styled(Select)({
+  height: "32px",
+  width: "116px",
+  borderRadius: "16px",
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderRadius: "16px",
+  },
+  "& .MuiSelect-select": {
+    borderRadius: "16px",
+  },
 });
-
-export const StyledStatusDot = styled("div", {
-  shouldForwardProp: (prop) => prop !== "status",
-})<{ status?: string }>(({ status }) => ({
-  width: 12,
-  height: 12,
-  borderRadius: "50%",
-  backgroundColor: getDeviceStatusColor(status),
-}));

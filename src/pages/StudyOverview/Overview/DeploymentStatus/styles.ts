@@ -1,13 +1,19 @@
-import { Button, Card, Typography } from "@mui/material";
+import { Button, Card, Tooltip, Typography } from "@mui/material";
 import { styled } from "@Utils/theme";
 
 export const StyledCard = styled(Card)({
-  display: "flex",
   flexDirection: "column",
   padding: 24,
   height: 288,
   borderRadius: 16,
 });
+
+export const StyledTooltip = styled(Tooltip)(({ theme }) => ({
+  color: theme.palette.grey[500],
+  "&:hover": {
+    color: theme.palette.primary.main,
+  },
+}));
 
 export const Top = styled("div")({
   display: "flex",
@@ -27,18 +33,9 @@ export const StyledButton = styled(Button)(({ theme }) => ({
 
 export const StyledTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
-}));
-
-export const ParticipantsRow = styled("div", {
-  shouldForwardProp: (prop) => prop !== "isFirst",
-})<{ isFirst?: boolean }>(({ isFirst, theme }) => ({
-  borderBottom: isFirst ? `1px solid ${theme.palette.grey[500]}` : "none",
-  paddingBottom: isFirst ? 10 : 0,
-  marginBottom: isFirst ? 4 : 0,
-  display: "grid",
-  gridTemplateColumns: "80px 1fr",
+  display: "flex",
+  alignItems: "center",
   gap: 8,
-  alignItems: "end",
 }));
 
 export const StyledNumber = styled(Typography, {

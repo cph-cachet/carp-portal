@@ -68,7 +68,7 @@ const DeploymentCard = ({
     () =>
       deployment.participants
         .map((participant) =>
-          participant.firstName !== null
+          participant.firstName
             ? `${participant.firstName} ${participant.lastName}`
             : "",
         )

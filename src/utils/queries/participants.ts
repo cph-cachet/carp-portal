@@ -11,6 +11,7 @@ import {
   ParticipantGroups,
   ParticipantInfo,
   ParticipantWithRoles,
+  InactiveDeployment,
 } from "@carp-dk/client";
 import { Statistics } from "@carp-dk/client/models/Statistics";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -57,6 +58,14 @@ export const useStopParticipantGroup = (studyId: string) => {
     onError: (error: CarpServiceError) => {
       setSnackbarError(error.httpResponseMessage);
     },
+  });
+};
+
+export const useInactiveDeployments = (studyId: string, lastUpdate: number) => {
+  return useQuery<InactiveDeployment[], CarpServiceError>({
+    queryFn: () =>
+      carpApi.getInactiveDeployments(studyId, lastUpdate, getConfig()),
+    queryKey: ["inactiveDeployments", { studyId, lastUpdate }],
   });
 };
 

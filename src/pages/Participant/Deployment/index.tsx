@@ -62,22 +62,19 @@ const Deployment = () => {
     createSummary.mutateAsync({ studyId, deploymentIds: [deploymentId] });
   };
 
-  const lastDataUpload = (lastData: {
-    epocSeconds: number;
-    value$kotlinx_datetime: Date;
-    nanosecondsOfSecond: number;
-  }) => {
-    if (lastData === null) {
+  const lastDataUpload = (lastData: Date
+  ) => {
+    if (!lastData) {
       return "";
     }
     if (
       calculateDaysPassedFromDate(
-        lastData.value$kotlinx_datetime.toString(),
+        lastData.toString(),
       ) === 0
     ) {
       return "Last data: Today";
     }
-    return `Last data: ${calculateDaysPassedFromDate(lastData.value$kotlinx_datetime.toString())} days ago`;
+    return `Last data: ${calculateDaysPassedFromDate(lastData.toString())} days ago`;
   };
 
   useEffect(() => {
@@ -129,9 +126,9 @@ const Deployment = () => {
   const getParticipantInitials = (participant: ParticipantData) => {
     if (
       participant.firstName === "" ||
-      participant.firstName === null ||
       participant.lastName === "" ||
-      participant.lastName === null
+      !participant.firstName || 
+      !participant.lastName
     ) {
       return participant.role ? participant.role[0] : "?";
     }

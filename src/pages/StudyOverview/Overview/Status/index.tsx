@@ -4,6 +4,8 @@ import { formatDateTime } from "@Utils/utility";
 import kotlinx from "@cachet/carp-kotlinx-datetime";
 import carpStudies from "@cachet/carp-studies-core";
 import { useNavigate, useParams } from "react-router-dom";
+import { Typography } from "@mui/material";
+import LinkIcon from "@mui/icons-material/Link";
 import LoadingSkeleton from "../LoadingSkeleton";
 import {
   ProtocolData,
@@ -76,6 +78,9 @@ const Status = () => {
           <ProtocolData variant="h4">
             Study Protocol: {studyDetails.protocolSnapshot.name}
           </ProtocolData>
+          <Typography variant="h6">
+            {studyDetails.protocolSnapshot.description}
+          </Typography>
           <StyledLink
             variant="h6"
             onClick={() => {
@@ -83,6 +88,12 @@ const Status = () => {
             }}
           >
             See detailed information in Study Settings
+            <LinkIcon
+              sx={{
+                marginLeft: "0.1rem",
+                fontSize: "1rem",
+              }}
+            />
           </StyledLink>
         </div>
       )}

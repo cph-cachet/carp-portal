@@ -29,7 +29,7 @@ const validationSchema = yup.object({
     .number()
     .required("Number of participants is required")
     .min(1, "Number of participants must be at least 1")
-    .max(1000, "Number of participants must be at most 1000"),
+    .max(2500, "Number of participants must be at most 2500"),
   expiryDate: yup
     .date()
     .required("Expiry date is required")
