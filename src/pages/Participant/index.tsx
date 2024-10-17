@@ -12,7 +12,7 @@ const Participant = () => {
       <StudyHeader path={sectionName} description={description} />
       <BasicInfo />
       <Deployment />
-      <InformedConsent />
+      {/*<InformedConsent />*/}
       {/* TODO: Functionality not complete, should not be in the stable release */}
       {/* <ParticipantData /> */}
     </StudyPageLayout>

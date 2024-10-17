@@ -7,12 +7,14 @@ import { ParticipantData } from "@carp-dk/client";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingSkeleton from "../LoadingSkeleton";
+import NotificationsIcon from "@mui/icons-material/NotificationsSharp";
+
 import {
   AccountIcon,
   Email,
   Initials,
   Left,
-  Name,
+  Name, RemindersContainer, ReminderText,
   Right,
   SecondaryText,
   StyledCard,
@@ -80,11 +82,10 @@ const BasicInfo = () => {
         {name}
         <Email variant="h6">{participant.email}</Email>
         <StyledDivider />
-        {/* TODO: Functionality not complete, should not be in the stable release */}
-        {/* <RemindersContainer onClick={() => setOpen(true)}>
+        <RemindersContainer onClick={() => setOpen(true)}>
           <ReminderText variant="h6">Send a reminder</ReminderText>
           <NotificationsIcon fontSize="small" color="primary" />
-        </RemindersContainer> */}
+        </RemindersContainer>
       </Left>
       <Right>
         <SecondaryText variant="h5">Account ID: {participantId}</SecondaryText>
@@ -94,6 +95,7 @@ const BasicInfo = () => {
         onClose={() => setOpen(false)}
         open={open}
         to={participant.email}
+        initials={initials}
       />
     </StyledCard>
   );
