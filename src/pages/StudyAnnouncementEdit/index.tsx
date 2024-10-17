@@ -33,12 +33,15 @@ const validationSchema = yup.object({
   subTitle: yup.string(),
   message: yup.string().required("Message is required"),
   type: yup.string().required("Type is required"),
-  url: yup
-    .string()
-    .matches(
-      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      "Enter correct url!",
-    ),
+  url: yup.string().test("is-url-valid", "URL is not valid", (value) => {
+    try {
+      // eslint-disable-next-line no-new
+      new URL(value);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }),
   image: yup
     .mixed()
     .nullable()
