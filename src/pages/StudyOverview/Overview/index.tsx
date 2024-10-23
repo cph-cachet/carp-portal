@@ -1,5 +1,5 @@
-import DeploymentStatus from "./DeploymentStatus";
 import DeploymentsInProgress from "./DeploymentsInProgress";
+import DeploymentStatus from "./DeploymentStatus";
 import InactiveDeployments from "./InactiveDeployments";
 import Status from "./Status";
 import StyledContainer from "./styles";
