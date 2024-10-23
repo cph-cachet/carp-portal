@@ -105,7 +105,7 @@ const DeploymentsInProgress = () => {
         >
           <TableHead>
             <StyledTableRow>
-              <HeaderTableCell width="25%">
+              <HeaderTableCell width="150px">
                 <HeaderText variant="h5">Deployment ID</HeaderText>
               </HeaderTableCell>
               <HeaderTableCell>
