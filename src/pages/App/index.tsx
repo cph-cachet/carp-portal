@@ -18,6 +18,7 @@ import StudyProtocol from "../StudyProtocol";
 import StudySettings from "../StudySettings";
 import Translations from "../Translation";
 import ProtectedRoute from "./ProtectedRoute";
+import Deployment from "../Deployment";
 
 const App = () => {
   const auth = useAuth();
@@ -151,6 +152,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Deployments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/studies/:id/participants/deployments/:deploymentId"
+          element={
+            <ProtectedRoute>
+              <Deployment />
             </ProtectedRoute>
           }
         />
