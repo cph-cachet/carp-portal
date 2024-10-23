@@ -34,6 +34,7 @@ export const HeaderTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,
   borderBottomWidth: 1,
   zIndex: 0,
+  width: "30%",
   paddingLeft: 0,
   paddingBottom: 0,
 }));
@@ -71,8 +72,8 @@ export const StatusContainer = styled("div")({
 export const StyledStatusDot = styled("div", {
   shouldForwardProp: (prop) => prop !== "status",
 })<{ status?: string }>(({ status }) => ({
-  width: 8,
-  height: 8,
+  width: 12,
+  height: 12,
   borderRadius: "50%",
   backgroundColor: getDeviceStatusColor(status),
 }));
