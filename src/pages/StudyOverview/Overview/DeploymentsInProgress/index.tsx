@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/system";
 import LoadingSkeleton from "../LoadingSkeleton";
 import {
@@ -29,6 +29,7 @@ import TooltipContent from "./TooltipContent";
 
 const DeploymentsInProgress = () => {
   const { id: studyId } = useParams();
+  const navigate = useNavigate();
   const {
     data: deploymentsAccountAndStatus,
     isLoading: isDeploymentsAccountAndStatusLoading,
@@ -104,7 +105,7 @@ const DeploymentsInProgress = () => {
         >
           <TableHead>
             <StyledTableRow>
-              <HeaderTableCell width="150px">
+              <HeaderTableCell width="25%">
                 <HeaderText variant="h5">Deployment ID</HeaderText>
               </HeaderTableCell>
               <HeaderTableCell>
@@ -114,7 +115,14 @@ const DeploymentsInProgress = () => {
           </TableHead>
           <TableBody>
             {deploymentProgress.map((g) => (
-              <StyledTableRow key={g.deploymentId}>
+              <StyledTableRow
+                onClick={() =>
+                  navigate(
+                    `/studies/${studyId}/participants/deployments/${g.deploymentId}/participants/`,
+                  )
+                }
+                key={g.deploymentId}
+              >
                 <StyledTableCell align="center">
                   <SecondaryCellText variant="h5">
                     {`... ${g.deploymentId.slice(-4)}`}
