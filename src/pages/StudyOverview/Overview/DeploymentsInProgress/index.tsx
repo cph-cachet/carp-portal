@@ -118,7 +118,7 @@ const DeploymentsInProgress = () => {
               <StyledTableRow
                 onClick={() =>
                   navigate(
-                    `/studies/${studyId}/participants/deployments/${g.deploymentId}/participants/`,
+                    `/studies/${studyId}/participants/deployments/${g.deploymentId}`,
                   )
                 }
                 key={g.deploymentId}
