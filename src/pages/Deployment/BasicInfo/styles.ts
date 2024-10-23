@@ -2,13 +2,15 @@ import { Button, Card, Divider, Typography } from "@mui/material";
 import { styled } from "@Utils/theme";
 import { getDeploymentStatusColor } from "@Utils/utility";
 
-export const StyledCard = styled(Card)({
+export const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
-  padding: "16px 24px",
+  padding: "10px 16px",
   marginBottom: 32,
   borderRadius: 8,
-});
+  border: `1px solid ${theme.palette.grey[700]}`,
+  boxShadow: "none",
+}));
 
 export const Left = styled("div")({
   display: "grid",
@@ -90,17 +92,15 @@ export const StyledStatusText = styled(Typography, {
   shouldForwardProp: (prop) => prop !== "status",
 })<{ status?: string }>(({ status }) => ({
   color: getDeploymentStatusColor(status),
+  textTransform: "uppercase",
 }));
 
 export const StyledButton = styled(Button)(({ theme }) => ({
   border: `1px solid ${theme.palette.grey[700]}`,
   borderRadius: 16,
   textTransform: "none",
-  padding: "8px 16px",
+  padding: "px 16px",
   color: theme.palette.error.main,
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
   gap: 8,
   "&:disabled": {
     color: theme.palette.primary.main,

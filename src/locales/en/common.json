@@ -1,0 +1,11 @@
+{
+  "owner_id": "Owner ID: {{id}}",
+  "study_id": "Study ID: {{id}}",
+  "deployment_id": "Deployment ID: {{id}}",
+  "created_on": "Created on: {{- date}}",
+  "started_on": "Started on: {{- date}}",
+  "stopped_on": "Stopped on: {{- date}}",
+  "stop_deployment": "Stop deployment",
+  "export_data": "Export Data",
+  "last_uploaded": "{`Last Uploaded: {{date}`}"
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import CopyButton from "@Components/Buttons/CopyButton";
 import CarpErrorCardComponent from "@Components/CarpErrorCardComponent";
 import { useParticipantGroupsAccountsAndStatus } from "@Utils/queries/participants";
@@ -7,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
 import { formatDateTime } from "@Utils/utility";
 import { Stop } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 import LoadingSkeleton from "../LoadingSkeleton";
 import {
   Left,
@@ -21,6 +23,7 @@ import {
 
 const BasicInfo = () => {
   const { deploymentId, id: studyId } = useParams();
+  const { t } = useTranslation();
 
   const {
     data: participantData,
@@ -44,7 +47,7 @@ const BasicInfo = () => {
   if (participantError)
     return (
       <CarpErrorCardComponent
-        message="An error occurred while loading participant data"
+        message={t("error.deployment_data")}
         error={participantError}
       />
     );
@@ -54,12 +57,10 @@ const BasicInfo = () => {
       <Left>
         <Stack direction="column" gap="8px" alignItems="center">
           <StyledStatusDot
-            // eslint-disable-next-line no-underscore-dangle
             status={deployment.deploymentStatus.__type.split(".").pop()}
           />
           <StyledStatusText
             variant="h6"
-            // eslint-disable-next-line no-underscore-dangle
             status={deployment.deploymentStatus.__type.split(".").pop()}
           >
             {deployment.deploymentStatus.__type.split(".").pop()}
@@ -68,53 +69,50 @@ const BasicInfo = () => {
         {!deployment.deploymentStatus.__type.includes("Stopped") && (
           <StyledButton variant="outlined">
             <Stop />
-            Stop deployment
+            {t("common:stop_deployment")}
           </StyledButton>
         )}
       </Left>
       <Right>
         <Stack direction="column" gap="8px">
           <SecondaryText variant="h6">
-            {`Created on: 
-            ${formatDateTime(deployment.deploymentStatus.createdOn, {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
+            {`${t("common:created_on", {
+              date: formatDateTime(deployment.deploymentStatus.createdOn, {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+              }),
             })}`}
           </SecondaryText>
           {deployment.deploymentStatus.startedOn && (
             <SecondaryText variant="h6">
-              {`Started on: 
-            ${formatDateTime(deployment.deploymentStatus.startedOn, {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-            })}`}
+              {`${t("common:started_on", {
+                date: formatDateTime(deployment.deploymentStatus.startedOn, {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                }),
+              })}`}
             </SecondaryText>
           )}
           {deployment.deploymentStatus.stoppedOn && (
             <SecondaryText variant="h6">
-              {`Stopped on: 
-            ${formatDateTime(deployment.deploymentStatus.stoppedOn, {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-            })}`}
+              {`${t("common:stopped_on", {
+                date: formatDateTime(deployment.deploymentStatus.stoppedOn, {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                }),
+              })}`}
             </SecondaryText>
           )}
         </Stack>
         <StyledDivider />
-        <Stack direction="column" gap="8px" alignItems="flex-end">
-          <Stack direction="row" gap="8px">
-            <SecondaryText variant="h6">Owner ID: {deploymentId}</SecondaryText>
-            <CopyButton textToCopy={deploymentId} idType="Owner" />
-          </Stack>
-          <Stack direction="row" gap="8px">
-            <SecondaryText variant="h6">
-              Deployment ID: {deploymentId}
-            </SecondaryText>
-            <CopyButton textToCopy={deploymentId} idType="Deployment" />
-          </Stack>
+        <Stack direction="row" gap="8px" marginTop={1}>
+          <SecondaryText variant="h6">
+            {t("common:deployment_id", { id: deploymentId })}
+          </SecondaryText>
+          <CopyButton textToCopy={deploymentId} idType="Deployment" />
         </Stack>
       </Right>
     </StyledCard>
