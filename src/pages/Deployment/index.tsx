@@ -2,6 +2,8 @@ import StudyPageLayout from "@Components/Layout/StudyPageLayout";
 import StudyHeader from "@Components/StudyHeader";
 import BasicInfo from "./BasicInfo";
 import Participants from "./Participants";
+import InformedConsentCard from "./InformedConsentCard";
+import Devices from "./Devices";
 
 const Deployment = () => {
   const sectionName = ["Deployments", "Deployment"];
@@ -12,7 +14,8 @@ const Deployment = () => {
       <StudyHeader path={sectionName} description={description} />
       <BasicInfo />
       <Participants />
-      {/* <InformedConsent /> */}
+      <Devices />
+      <InformedConsentCard />
     </StudyPageLayout>
   );
 };

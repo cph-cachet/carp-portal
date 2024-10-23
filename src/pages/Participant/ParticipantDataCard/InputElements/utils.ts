@@ -124,7 +124,7 @@ const diagnosisValidationSchema = yup
   );
 
 const getParticipantDataFormik = (
-  participantData: ExpectedParticipantData[],
+  participantData: ExpectedParticipantData[] | undefined,
   startingData: Data[],
   setParticipantData: UseMutationResult<any, unknown, any, unknown>,
   role: string,

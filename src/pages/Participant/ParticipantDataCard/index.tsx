@@ -59,7 +59,8 @@ const ParticipantDataCard = () => {
   } = useGetParticipantData(deploymentId);
 
   const [participant, setParticipant] = useState<ParticipantData | null>(null);
-
+  const expectedParticipantData = study?.protocolSnapshot.expectedParticipantData ? study?.protocolSnapshot.expectedParticipantData.toArray() : [];
+  const initalValues = participantData?.common.values ? participantData?.common.values.toArray().filter((v) => v) : [];
   useEffect(() => {
     if (participantGroupStatus) {
       setParticipant(
@@ -71,8 +72,8 @@ const ParticipantDataCard = () => {
   }, [participantGroupStatus]);
 
   const participantDataFromik = getParticipantDataFormik(
-    study?.protocolSnapshot.expectedParticipantData.toArray(),
-    participantData?.common.values.toArray().filter((v) => v),
+    expectedParticipantData,
+    initalValues,
     setParticipantData,
     participant?.role,
     setEditing,

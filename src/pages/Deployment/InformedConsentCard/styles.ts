@@ -5,6 +5,7 @@ import {
   Typography,
   Accordion,
   AccordionSummary,
+  Stack,
 } from "@mui/material";
 import { styled } from "@Utils/theme";
 
@@ -26,12 +27,11 @@ export const SyledAccordionSummary = styled(AccordionSummary)({
   borderRadius: 16,
 });
 
-export const StyledCard = styled(Card)({
+export const StyledStack = styled(Stack)({
   display: "flex",
   justifyContent: "space-between",
-  padding: "16px 24px",
-  marginBottom: 32,
-  borderRadius: 16,
+  alignItems:"center",
+  padding: "0px 24px"
 });
 
 export const Title = styled(Typography)(({ theme }) => ({
@@ -41,6 +41,7 @@ export const Title = styled(Typography)(({ theme }) => ({
 export const Right = styled("div")({
   display: "flex",
   alignItems: "center",
+  gap: "24px",
 });
 
 export const StyledDivider = styled(Divider)(({ theme }) => ({
@@ -67,14 +68,22 @@ export const NameContainer = styled("div")({
 });
 
 export const DownloadButton = styled(Button)(({ theme }) => ({
+  height: "36px",
   color: theme.palette.primary.main,
   backgroundColor: "transparent",
-  border: "none",
+  border: "1px solid",
+  borderColor: theme.palette.grey[700],
+  borderRadius: 16,
   cursor: "pointer",
   textTransform: "none",
-  gap: 4,
+  padding: "8px 16px",
+  gap: 8,
 }));
 
 export const LastUploadText = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[500],
+}));
+
+export const NotRegistedText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.error.main,
 }));

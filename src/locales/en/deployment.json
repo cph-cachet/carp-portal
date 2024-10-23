@@ -9,7 +9,8 @@
     "description": "Select the master device in order to deploy."
   },
   "informed_consents_card": {
-    "title": "Informed Consents"
+    "title": "Informed Consents",
+    "not_registered": "Not registered"
   },
   "data_card": {
     "title": "Data",

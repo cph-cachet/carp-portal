@@ -7,5 +7,5 @@
   "stopped_on": "Stopped on: {{- date}}",
   "stop_deployment": "Stop deployment",
   "export_data": "Export Data",
-  "last_uploaded": "{`Last Uploaded: {{date}`}"
+  "last_uploaded": "Last Uploaded: {{- date}}"
 }
