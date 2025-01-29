@@ -18,8 +18,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(axios@1.7.7)(oidc-client-ts@3.1.0)(react-oidc-context@3.2.0(oidc-client-ts@3.1.0)(react@18.3.1))(react@18.3.1)
       '@carp-dk/client':
-        specifier: 1.5.0
-        version: 1.5.0
+        specifier: 1.6.0
+        version: 1.6.0
       '@emotion/react':
         specifier: ^11.11.4
         version: 11.13.3(@types/react@18.3.12)(react@18.3.1)
@@ -291,8 +291,8 @@ packages:
       react: '>=16.8.0'
       react-oidc-context: ^2.3.1
 
-  '@carp-dk/client@1.5.0':
-    resolution: {integrity: sha512-Yewiz5LBa3z/23UNlN+J0ICZmGMFY2dWC5Iv3+tr3sXGijWVY5p2CCa+Y6klckMlWIltWn93bhOcuqrex4UM7A==}
+  '@carp-dk/client@1.6.0':
+    resolution: {integrity: sha512-repAVnvk57EtCTUUA6Zt3WVaSelY6ReQoLW/qlRiegGC+D6hfYSnxSMuqx2DqM3tWipzVqMhPj5WKrGjFyGNwA==}
 
   '@carp-dk/eslint-config@1.1.0':
     resolution: {integrity: sha512-vIz9PJZBaSadbe3rO9nTJQoa01c8h9judJv1uVDYjlApienWU8W22Yi8aBJLHil3wI9dFXTPcDvx1yqMpkOo+w==}
@@ -3685,7 +3685,7 @@ snapshots:
       react: 18.3.1
       react-oidc-context: 3.2.0(oidc-client-ts@3.1.0)(react@18.3.1)
 
-  '@carp-dk/client@1.5.0': {}
+  '@carp-dk/client@1.6.0': {}
 
   ? '@carp-dk/eslint-config@1.1.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3))(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint-config-airbnb-typescript@18.0.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3))(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1))(eslint-config-airbnb@19.0.4(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint-plugin-jsx-a11y@6.10.2(eslint@8.57.1))(eslint-plugin-react-hooks@4.6.2(eslint@8.57.1))(eslint-plugin-react@7.37.2(eslint@8.57.1))(eslint@8.57.1))(eslint-config-prettier@9.1.0(eslint@8.57.1))(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint-plugin-prefer-arrow@1.2.3(eslint@8.57.1))(eslint-plugin-prettier@5.0.0-alpha.2(eslint-config-prettier@9.1.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.3.3))(eslint-plugin-react-hooks@4.6.2(eslint@8.57.1))(eslint-plugin-react-refresh@0.4.14(eslint@8.57.1))(eslint-plugin-react@7.37.2(eslint@8.57.1))(eslint-plugin-unused-imports@4.1.4(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1)(prettier-plugin-organize-imports@3.2.4(prettier@3.3.3)(typescript@5.6.3))(prettier@3.3.3)'
   : dependencies:

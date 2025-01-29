@@ -2,7 +2,8 @@
 import CarpErrorCardComponent from "@Components/CarpErrorCardComponent";
 import { convertICToReactPdf, formatDateTime } from "@Utils/utility";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import { Typography } from "@mui/material";
+import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
+import { Stack, Typography } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -10,17 +11,22 @@ import {
   useParticipantGroupsAccountsAndStatus,
 } from "@Utils/queries/participants";
 import { pdf } from "@react-pdf/renderer";
+import { useDownloadFile, useGetFiles } from "@Utils/queries/studies";
+import { CarpFile } from "@carp-dk/client/models/CarpFile";
+import { useTranslation } from "react-i18next";
 import LoadingSkeleton from "../LoadingSkeleton";
 import {
-  DownloadButton,
+  ActionButton,
   LastUploadText,
   Right,
   StyledCard,
   StyledDivider,
   Title,
 } from "./styles";
+import UploadInformedConsentModal from "./UploadInformedConsentModal";
 
 const InformedConsent = () => {
+  const { t } = useTranslation();
   const { participantId, deploymentId, id: studyId } = useParams();
 
   const {
@@ -34,6 +40,19 @@ const InformedConsent = () => {
     isLoading: participantGroupStatusLoading,
     error: participantGroupStatusError,
   } = useParticipantGroupsAccountsAndStatus(studyId);
+  const {
+    data: files,
+    isLoading: filesLoading,
+    error: filesError,
+  } = useGetFiles(studyId);
+  const [consentFile, setConsentFile] = useState<CarpFile>(null);
+  const downloadFileMutation = useDownloadFile(studyId);
+
+  const [open, setOpen] = useState(false);
+
+  const onModalClose = () => {
+    setOpen(false);
+  };
 
   const downloadPdf = async () => {
     const blob = await pdf(
@@ -50,6 +69,30 @@ const InformedConsent = () => {
     a.dispatchEvent(clickEvt);
     a.remove();
   };
+
+  const downloadFile = async () => {
+    await downloadFileMutation.mutateAsync(consentFile);
+  };
+
+  useEffect(() => {
+    if (files) {
+      const c = files
+        .sort((a, b) => {
+          return (
+            new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+          );
+        })
+        .find((f) => {
+          return (
+            f.metadata["document-type"] === "informed_consent" &&
+            f.metadata["participant-id"] === participantId
+          );
+        });
+      if (c) {
+        setConsentFile(c);
+      }
+    }
+  }, [files]);
 
   useEffect(() => {
     if (!isLoading && !participantGroupStatusLoading) {
@@ -83,44 +126,93 @@ const InformedConsent = () => {
     }
   }, [participantGroupStatus, participantData]);
 
-  const dateOfLastUpdate = useMemo(() => {
+  const dateOfLastUpdateForParticipantData = useMemo(() => {
     if (consent) {
-      return `Last Updated: ${formatDateTime(consent.signedTimestamp, {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      })}`;
+      return t("participant:informed_consent.participant_data_upload_date", {
+        date: formatDateTime(consent.signedTimestamp, {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        }),
+      });
     }
-    return "Informed consent not found";
+    return t("participant:informed_consent.data_not_found");
   }, [consent]);
 
-  if (isLoading || participantGroupStatusLoading) return <LoadingSkeleton />;
+  const dateOfLastUpdateForUploadedFile = useMemo(() => {
+    if (consentFile) {
+      return t("participant:informed_consent.file_upload_date", {
+        date: formatDateTime(consentFile.created_at, {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        }),
+      });
+    }
+    return t("participant:informed_consent.file_not_found");
+  }, [consentFile]);
 
-  if (error || participantGroupStatusError) {
+  if (isLoading || filesLoading || participantGroupStatusLoading)
+    return <LoadingSkeleton />;
+
+  if (error || participantGroupStatusError || filesError) {
     return (
       <CarpErrorCardComponent
-        message="An error occurred while loading informed consent"
-        error={error ?? participantGroupStatusError}
+        message={t("error:informed_consents")}
+        error={error ?? participantGroupStatusError ?? filesError}
       />
     );
   }
 
   return (
-    <StyledCard elevation={2}>
-      <Title variant="h3">Informed Consent</Title>
-      <Right>
-        <LastUploadText variant="h6">{dateOfLastUpdate}</LastUploadText>
-        {consent && (
-          <>
-            <StyledDivider />
-            <DownloadButton onClick={() => downloadPdf()}>
-              <Typography variant="h6">Export</Typography>
-              <FileDownloadOutlinedIcon fontSize="small" />
-            </DownloadButton>
-          </>
-        )}
-      </Right>
-    </StyledCard>
+    <>
+      <UploadInformedConsentModal open={open} onClose={onModalClose} />
+      <StyledCard elevation={2}>
+        <Title variant="h3">{t("participant:informed_consent.title")}</Title>
+        <Right>
+          <Stack direction="column" alignItems="flex-start">
+            <Stack
+              display="grid"
+              direction="row"
+              alignItems="center"
+              gridTemplateColumns="310px 20px 100px 100px"
+            >
+              <LastUploadText variant="h6" textAlign="end">
+                {dateOfLastUpdateForUploadedFile}
+              </LastUploadText>
+              <StyledDivider />
+              <ActionButton onClick={() => setOpen(true)}>
+                <Typography variant="h6">{t("common:upload")}</Typography>
+                <FileUploadOutlinedIcon fontSize="small" />
+              </ActionButton>
+              {consentFile && (
+                <ActionButton onClick={() => downloadFile()}>
+                  <Typography variant="h6">{t("common:download")}</Typography>
+                  <FileDownloadOutlinedIcon fontSize="small" />
+                </ActionButton>
+              )}
+            </Stack>
+            <Stack
+              display="grid"
+              direction="row"
+              alignItems="center"
+              gridTemplateColumns="310px 20px 100px 100px"
+            >
+              <LastUploadText variant="h6" textAlign="end">
+                {dateOfLastUpdateForParticipantData}
+              </LastUploadText>
+              {consent && <StyledDivider />}
+              {consent && (
+                <ActionButton onClick={() => downloadPdf()}>
+                  <Typography variant="h6">{t("common:export")}</Typography>
+                  <FileDownloadOutlinedIcon fontSize="small" />
+                </ActionButton>
+              )}
+            </Stack>
+          </Stack>
+        </Right>
+      </StyledCard>
+    </>
   );
 };
 

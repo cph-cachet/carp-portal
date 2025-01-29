@@ -17,8 +17,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
-import { StyledButton, StyledCard, StyledContainer } from "./styles";
 import { MessageData } from "@carp-dk/client";
+import { StyledButton, StyledCard, StyledContainer } from "./styles";
 
 const fileTypes = [
   "image/png",

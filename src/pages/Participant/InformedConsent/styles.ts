@@ -27,7 +27,7 @@ export const StyledDivider = styled(Divider)(({ theme }) => ({
   height: 20,
 }));
 
-export const DownloadButton = styled(Button)(({ theme }) => ({
+export const ActionButton = styled(Button)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   color: theme.palette.primary.main,

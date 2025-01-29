@@ -12,6 +12,7 @@ import {
   ResourceData,
   StudyOverview,
   User,
+  CarpFile,
 } from "@carp-dk/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCurrentUser } from "./auth";
@@ -756,6 +757,67 @@ export const useDeleteTranslation = () => {
       queryClient.invalidateQueries({
         queryKey: ["translations", variables.studyId],
       });
+    },
+    onError: (error: CarpServiceError) => {
+      setSnackbarError(error.httpResponseMessage);
+    },
+  });
+};
+
+export const useCreateFile = () => {
+  const { setSnackbarSuccess, setSnackbarError } = useSnackbar();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (props: { studyId: string; formData: FormData }) => {
+      return carpApi.createFile(props.studyId, props.formData, getConfig());
+    },
+    onSuccess: () => {
+      setSnackbarSuccess("File uploaded!");
+      queryClient.invalidateQueries({ queryKey: ["files"] });
+    },
+    onError: (error: CarpServiceError) => {
+      setSnackbarError(error.httpResponseMessage);
+    },
+  });
+};
+
+export const useGetFiles = (studyId: string) => {
+  return useQuery<CarpFile[], CarpServiceError>({
+    queryFn: async () => carpApi.getFiles(studyId, getConfig()),
+    queryKey: ["files"],
+  });
+};
+
+export const useGetOneFile = (studyId: string, fileId: number) => {
+  return useQuery<CarpFile, CarpServiceError>({
+    queryFn: async () => carpApi.getFile(studyId, fileId, getConfig()),
+    queryKey: ["file", fileId],
+  });
+};
+
+export const useDownloadFile = (studyId: string) => {
+  const { setSnackbarSuccess, setSnackbarError } = useSnackbar();
+
+  return useMutation({
+    mutationFn: async (file: CarpFile) => {
+      const response = await carpApi.downloadFile(
+        studyId,
+        file.id,
+        getConfig(),
+      );
+      const blob = new Blob([response], {
+        type: file.metadata["content-type"],
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", file.original_name);
+      document.body.appendChild(link);
+      return link.click();
+    },
+    onSuccess: () => {
+      setSnackbarSuccess("File will start downloading shortly");
     },
     onError: (error: CarpServiceError) => {
       setSnackbarError(error.httpResponseMessage);

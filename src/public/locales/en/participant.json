@@ -1,5 +1,16 @@
 {
   "basic_info": {
     "send_reminder": "Send a reminder"
+  },
+  "informed_consent": {
+    "upload": {
+      "title": "Upload Informed Consent",
+      "description": "Upload a picture or PDF of the informed consent form."
+    },
+    "title": "Informed Consent",
+    "file_upload_date": "Last informed consent file upload: {{- date }}",
+    "participant_data_upload_date": "Last informed consent data update: {{- date }}",
+    "file_not_found": "Informed consent file not found",
+    "data_not_found": "Informed consent data not found"
   }
 }

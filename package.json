@@ -36,7 +36,7 @@
     "@babel/plugin-transform-react-jsx-self": "^7.24.7",
     "@babel/plugin-transform-react-jsx-source": "^7.24.7",
     "@carp-dk/authentication-react": "^1.0.1",
-    "@carp-dk/client": "1.5.0",
+    "@carp-dk/client": "1.6.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@js-joda/core": "^5.6.2",
