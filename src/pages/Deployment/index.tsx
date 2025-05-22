@@ -6,6 +6,7 @@ import BasicInfo from "./BasicInfo";
 import Participants from "./Participants";
 import InformedConsentCard from "./InformedConsentCard";
 import Devices from "./Devices";
+import DataVisualizationForDeployment from "./DataVisualizationForDeployment";
 
 const Deployment = () => {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ const Deployment = () => {
       <Participants />
       <Devices />
       <InformedConsentCard />
+      <DataVisualizationForDeployment />
     </StudyPageLayout>
   );
 };

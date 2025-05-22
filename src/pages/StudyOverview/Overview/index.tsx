@@ -3,6 +3,7 @@ import DeploymentStatus from "./DeploymentStatus";
 import InactiveDeployments from "./InactiveDeployments";
 import Status from "./Status";
 import StyledContainer from "./styles";
+import DataVisualizationForStudy from "./DataVisualizationForStudy";
 
 const Overview = () => {
   return (
@@ -11,6 +12,7 @@ const Overview = () => {
       <DeploymentStatus />
       <DeploymentsInProgress />
       <InactiveDeployments />
+      <DataVisualizationForStudy />
     </StyledContainer>
   );
 };
